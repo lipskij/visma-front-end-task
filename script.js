@@ -54,3 +54,31 @@ function addToSessionStorage(pizza) {
 function loadItem() {
   return JSON.parse(sessionStorage.getItem("pizzas")) || [];
 }
+
+inputs[0].addEventListener("change", nameInputCheck);
+
+function nameInputCheck() {
+  if (inputs[0].value.length > 30) {
+    document.querySelector(".form-btn").disabled = true;
+    errMessage.className = "error";
+  } else {
+    errMessage.className = "no-error";
+    document.querySelector(".form-btn").disabled = false;
+  }
+  uniqueNameCheck();
+}
+
+function uniqueNameCheck() {
+  const pizzas = loadItem();
+  if (pizzas.length === 0) {
+    return;
+  }
+  const pizzaName = pizzas.map((i) => i.name);
+  if (pizzaName.includes(inputs[0].value)) {
+    uniqueName.classList.toggle("error");
+    document.querySelector(".form-btn").disabled = true;
+  } else {
+    uniqueName.className = "no-error";
+    document.querySelector(".form-btn").disabled = false;
+  }
+}
