@@ -79,7 +79,17 @@
           <br></br>
           <button class="form-btn" type="submit">Add pizza</button>
         </form>
-        <button class='delete-item'>Clear All</button>
+        <div class="controls">
+            <button class='delete-item'>Clear All</button>
+              <div>
+                <label for="sorters">Sort by</label>
+                <select name="sorters" id="sorters">
+                  <option class="sort-name" value="name">Name</option>
+                  <option class="sort-price" value="price">Price</option>
+                  <option class="sort-heat" value="heat">Heat</option>
+                </select>
+            </div>
+          </div>
       </div>
     </main>
     <script src="./script.js"></script>

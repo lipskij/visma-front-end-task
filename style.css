@@ -13,12 +13,12 @@ label {
   font-weight: 900;
 }
 
-.form {
-  padding: 1rem;
+form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
   margin: 0 auto;
 }
 
@@ -109,6 +109,19 @@ h3 {
   margin: 0 auto;
 }
 
+.controls {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.controls select {
+  padding: 0.3rem;
+  font-size: 1.2rem;
+}
+
 @media screen and (min-width: 1024px) {
   .toppings {
     grid-template-columns: repeat(10, 1fr);
@@ -119,5 +132,8 @@ h3 {
   }
   .heat {
     width: 80%;
+  }
+  .controls {
+    justify-content: space-around;
   }
 }

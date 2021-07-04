@@ -144,3 +144,38 @@ function attachRemoveListeners() {
     button.addEventListener("click", deleteFromSession);
   });
 }
+
+const select = document.getElementById("sorters");
+
+const SORT_PRICE = `price`;
+const SORT_HEAT = `heat`;
+const SORT_NAME = `name`;
+
+select.addEventListener("change", (e) => {
+  switch (e.target.value) {
+    case SORT_PRICE:
+      sortBy(SORT_PRICE);
+      break;
+    case SORT_HEAT:
+      sortBy(SORT_HEAT);
+      break;
+    default:
+      sortByName();
+  }
+});
+
+function sortBy(key) {
+  const pizzas = loadItem();
+
+  console.log({ before: pizzas });
+  pizzas.sort((a, b) => Number(b[key]) - Number(a[key]));
+  console.log({ after: pizzas });
+  updateMenu(pizzas);
+}
+
+function sortByName() {
+  const pizzas = loadItem();
+
+  pizzas.sort((a, b) => (a.name > b.name ? 1 : -1));
+  updateMenu(pizzas);
+}
