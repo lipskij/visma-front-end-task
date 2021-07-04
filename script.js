@@ -167,9 +167,7 @@ select.addEventListener("change", (e) => {
 function sortBy(key) {
   const pizzas = loadItem();
 
-  console.log({ before: pizzas });
   pizzas.sort((a, b) => Number(b[key]) - Number(a[key]));
-  console.log({ after: pizzas });
   updateMenu(pizzas);
 }
 
