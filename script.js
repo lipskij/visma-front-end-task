@@ -58,6 +58,44 @@ function loadItem() {
   return JSON.parse(sessionStorage.getItem("pizzas")) || [];
 }
 
+function updateMenu(pizzas = []) {
+  const existingList = document.querySelector(".list-div");
+  if (existingList) {
+    existingList.innerHTML = "";
+  }
+
+  const list = existingList || document.createElement("div");
+  list.className = "list-div";
+
+  const items = pizzas
+    .map(
+      (pizza) => `
+        <li>Name: ${pizza.name.charAt(0).toUpperCase() + pizza.name.slice(1)} ${
+        pizza.heat ? new Array(Number(pizza.heat)).fill("🌶").join(" ") : ""
+      }<br></br>
+        Price: ${new Intl.NumberFormat("lt-LT", {
+          style: "currency",
+          currency: "EUR",
+        }).format(pizza.price)}<br></br>
+        
+        Toppings: ${pizza.toppings} <br></br>
+        <div class='image-div'>${pizza.photo
+          .map((i) => (i ? `<img src='./images/${i}.svg' />` : ""))
+          .join("")}
+        </div>
+        <div class='delete-btn'><button id=${
+          pizza.name
+        } class='delete-session'>Delete</button></div>
+        </li>`
+    )
+    .join("");
+  list.innerHTML = "";
+  list.innerHTML = `<ul class='list'>${items}</ul>`;
+
+  document.body.append(list);
+  attachRemoveListeners();
+}
+
 inputs[0].addEventListener("change", nameInputCheck);
 
 function nameInputCheck() {
@@ -86,34 +124,23 @@ function uniqueNameCheck() {
   }
 }
 
-function updateMenu(pizzas = []) {
-  const existingList = document.querySelector(".list-div");
-  if (existingList) {
-    existingList.innerHTML = "";
-  }
-
-  const list = existingList || document.createElement("div");
-
-  const items = pizzas
-    .map(
-      (pizza) => `
-      <li>Name: ${pizza.name.charAt(0).toUpperCase() + pizza.name.slice(1)} ${
-        pizza.heat
-      }<br></br>
-      Price: ${pizza.price}<br></br>
-      Toppings: ${pizza.toppings} <br></br>
-      <div class='image-div'>${pizza.photo
-        .map((i) => (i ? `<img src='./images/${i}.svg' />` : ""))
-        .join("")}
-      </div>
-      <div class='delete-btn'><button id=${
-        pizza.name
-      } class='delete-session'>Delete</button></div>
-      </li>`
-    )
-    .join("");
-  list.innerHTML = "";
-  list.innerHTML = `<ul class='list'>${items}</ul>`;
-
-  document.body.append(list);
+function attachRemoveListeners() {
+  const deleteFromStorage = document.getElementsByClassName("delete-session");
+  deleteButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    sessionStorage.clear();
+    updateMenu([]);
+  });
+  Array.from(deleteFromStorage).forEach((button) => {
+    function deleteFromSession() {
+      const pizzas = loadItem();
+      const updatedPizzas = pizzas.filter((i) => i.name !== button.id);
+      const wantsToDelete = confirm("Do you want to delete this item?");
+      if (wantsToDelete) {
+        sessionStorage.setItem("pizzas", JSON.stringify(updatedPizzas));
+        updateMenu(updatedPizzas);
+      }
+    }
+    button.addEventListener("click", deleteFromSession);
+  });
 }
