@@ -17,9 +17,10 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 1rem;
   margin: 0 auto;
+  width: 80%;
 }
 
 .form input {
