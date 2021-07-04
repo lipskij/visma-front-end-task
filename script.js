@@ -16,6 +16,8 @@ const toppings = [
 const photos = [inputs[11], inputs[12], inputs[13], inputs[14]];
 
 submitForm.addEventListener("submit", handleSubmit);
+const pizzas = loadItem();
+updateMenu(pizzas);
 
 function photoCheckBox() {
   return photos.map((i) => (i.checked ? i.value : ""));
@@ -43,6 +45,7 @@ function handleSubmit(e) {
 
   addToSessionStorage(pizza);
   e.target.reset();
+  updateMenu(loadItem());
 }
 
 function addToSessionStorage(pizza) {
@@ -81,4 +84,36 @@ function uniqueNameCheck() {
     uniqueName.className = "no-error";
     document.querySelector(".form-btn").disabled = false;
   }
+}
+
+function updateMenu(pizzas = []) {
+  const existingList = document.querySelector(".list-div");
+  if (existingList) {
+    existingList.innerHTML = "";
+  }
+
+  const list = existingList || document.createElement("div");
+
+  const items = pizzas
+    .map(
+      (pizza) => `
+      <li>Name: ${pizza.name.charAt(0).toUpperCase() + pizza.name.slice(1)} ${
+        pizza.heat
+      }<br></br>
+      Price: ${pizza.price}<br></br>
+      Toppings: ${pizza.toppings} <br></br>
+      <div class='image-div'>${pizza.photo
+        .map((i) => (i ? `<img src='./images/${i}.svg' />` : ""))
+        .join("")}
+      </div>
+      <div class='delete-btn'><button id=${
+        pizza.name
+      } class='delete-session'>Delete</button></div>
+      </li>`
+    )
+    .join("");
+  list.innerHTML = "";
+  list.innerHTML = `<ul class='list'>${items}</ul>`;
+
+  document.body.append(list);
 }
