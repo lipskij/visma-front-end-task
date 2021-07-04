@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Emil Lipskij Front End Summer 2021 Task"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Fron End Summer Task 2021</title>
+  </head>
+  <body>
+    <main>
+      <div class="form">
+        <form>
+          <p class="no-error">Name can't be longer than 30 characters</p>
+          <p id="unique" class="no-error">Unique name required</p>
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="name"
+            name="name"
+            placeholder="Enter name"
+            required
+          /><br /><br />
+          <label for="price">Price</label>
+          <input
+            type="number"
+            class="price"
+            name="price"
+            placeholder="Enter price"
+            required
+            step=".01"
+          />
+          <h3>Heat</h3>
+          <div class="heat">
+            <label for="weak">🌶</label>
+            <input type="radio" id="weak" class="weak" name="heat" value='1' />
+            <label for="hot">🌶🌶</label>
+            <input type="radio" id="hot" class="hot" name="heat" value='2'/>
+            <label for="scorching-hot">🌶</label>
+            <input type="radio"  id="scorching-hot" class="scorching-hot" name="heat" value="3" />
+          </div>
+          <h3>Toppings</h3>
+          <div class="toppings">
+            <label for="Dough">Dough</label>
+            <input type="checkbox" class="dough" name="Dough" value='Dough' checked required/>
+            <label for="Souce">Souce</label>
+            <input type="checkbox" class="souce" name="Souce" value='Souce' checked required/>
+            <label for="Bacon">Bacon</label>
+            <input type="checkbox" class="bacon" name="Bacon" value='Bacon' />
+            <label for="Cheese">Cheese</label>
+            <input type="checkbox" class="cheese" name="Cheese" value='Cheese' />
+            <label for="Salami">Salami</label>
+            <input type="checkbox" class="salami" name="Salami" value='Salami' />
+            <label for="Tomatoes">Tomatoes</label>
+            <input type="checkbox" class="tomatoes" name="Tomatoes" value='Tomatoes' />
+          </div>
+          <div class="image-checkbox">
+            <label for="pizzaphoto1"
+              ><img src="./images/pizzaphoto1.svg" alt="image1"
+            /></label>
+            <input type="checkbox" id="photo" name="photo" value='pizzaphoto1'/>
+            <label for="pizzaphoto2"
+              ><img src="./images/pizzaphoto2.svg" alt="image2"
+            /></label>
+            <input type="checkbox" id="photo1" name="photo1" value='pizzaphoto2'/>
+            <label for="pizzaphoto3"
+              ><img src="./images/pizzaphoto3.svg" alt="image3"
+            /></label>
+            <input type="checkbox" id="photo2" name="photo2" value='pizzaphoto3'/>
+            <label for="pizzaphoto4"
+              ><img src="./images/pizzaphoto4.svg" alt="image4"
+            /></label>
+            <input type="checkbox" id="photo3" name="photo2" value='pizzaphoto4'/>
+          </div>
+          <br></br>
+          <button class="form-btn" type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
+`
